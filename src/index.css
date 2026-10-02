@@ -1,0 +1,214 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/dm-sans';
+@import '@fontsource/instrument-serif/400.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+
+@custom-variant light (&:where(.light, .light *));
+
+/*
+ * Design tokens. Dark is the default; `.light` on <html> switches.
+ * Text tokens are checked for WCAG AA against --bg and the glass surfaces.
+ */
+:root {
+  color-scheme: dark;
+  --bg: #0a0912;
+  --bg-2: #110f1c;
+  --glass: rgb(255 255 255 / 0.045);
+  --glass-strong: rgb(255 255 255 / 0.075);
+  --glass-hover: rgb(255 255 255 / 0.09);
+  --border: rgb(255 255 255 / 0.09);
+  --border-strong: rgb(255 255 255 / 0.16);
+  --text: #f3f1ff;
+  --text-2: #bdb9d9;
+  --text-3: #918caf;
+  --accent-1: #7c3aed;
+  --accent-2: #2563eb;
+  --accent-text: #aeb0ff;
+  --accent-soft: rgb(124 58 237 / 0.18);
+  --good: #0ca30c;
+  --good-text: #4cd964;
+  --good-soft: rgb(12 163 12 / 0.16);
+  --warn: #fab219;
+  --warn-text: #fbbf3c;
+  --danger: #f06a6a;
+  --danger-soft: rgb(240 106 106 / 0.14);
+  --track: rgb(255 255 255 / 0.08);
+  --chart-series: #7c7ff5;
+  --chart-grid: rgb(255 255 255 / 0.07);
+  --chart-axis: rgb(255 255 255 / 0.16);
+  --chart-surface: #15131f;
+  --heat-empty: #262338;
+  --grain-opacity: 0.07;
+  --blob-opacity: 0.55;
+  --shadow: 0 1px 0 0 rgb(255 255 255 / 0.06) inset, 0 12px 32px -12px rgb(0 0 0 / 0.6);
+}
+
+.light {
+  color-scheme: light;
+  --bg: #f4f3fa;
+  --bg-2: #ebe9f5;
+  --glass: rgb(255 255 255 / 0.62);
+  --glass-strong: rgb(255 255 255 / 0.8);
+  --glass-hover: rgb(255 255 255 / 0.9);
+  --border: rgb(30 20 80 / 0.09);
+  --border-strong: rgb(30 20 80 / 0.18);
+  --text: #15131f;
+  --text-2: #46425f;
+  --text-3: #625e7c;
+  --accent-text: #4f46e5;
+  --accent-soft: rgb(124 58 237 / 0.1);
+  --good-text: #067a06;
+  --good-soft: rgb(12 163 12 / 0.12);
+  --warn-text: #8a5a00;
+  --danger: #c93a3a;
+  --danger-soft: rgb(201 58 58 / 0.1);
+  --track: rgb(30 20 80 / 0.08);
+  --chart-series: #5b4fe0;
+  --chart-grid: rgb(30 20 80 / 0.07);
+  --chart-axis: rgb(30 20 80 / 0.18);
+  --chart-surface: #fbfaff;
+  --heat-empty: #e3e1ee;
+  --grain-opacity: 0.05;
+  --blob-opacity: 0.32;
+  --shadow: 0 1px 0 0 rgb(255 255 255 / 0.8) inset, 0 12px 32px -16px rgb(40 20 120 / 0.25);
+}
+
+@theme inline {
+  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-sans: 'DM Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-glass: var(--glass);
+  --color-glass-strong: var(--glass-strong);
+  --color-glass-hover: var(--glass-hover);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--text);
+  --color-fg-2: var(--text-2);
+  --color-fg-3: var(--text-3);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-good-fg: var(--good-text);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-fg: var(--warn-text);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-track: var(--track);
+
+  --radius-card: 1.25rem;
+  --shadow-glass: var(--shadow);
+
+  --animate-pop: pop 360ms cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply font-sans text-fg antialiased;
+    min-height: 100dvh;
+    font-size: 15px;
+    line-height: 1.5;
+    overscroll-behavior-y: none;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .bg-accent-gradient {
+    background-image: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+  }
+  .text-accent-gradient {
+    background-image: linear-gradient(100deg, #b794ff, #7aa2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .light .text-accent-gradient {
+    background-image: linear-gradient(100deg, #6d28d9, #1d4ed8);
+  }
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+  /* Grain sits above the blobs, below the content. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .light .grain::after {
+    mix-blend-mode: multiply;
+    filter: invert(1);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sheet-in {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
