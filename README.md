@@ -18,6 +18,12 @@ npm run lint       # oxlint
 
 Beim ersten Start kannst du „Mit Beispieldaten testen“ wählen: 10 Wochen Verlauf inkl. offenem Overload-Vorschlag.
 
+## Hosting (GitHub Pages)
+
+`.github/workflows/pages.yml` testet, baut und veröffentlicht die App bei jedem Push.
+Einmalig nötig: **Settings → Pages → Source: „GitHub Actions“**. Danach erreichbar unter
+`https://nchristen999-hue.github.io/habbittracker/`.
+
 ## Funktionen
 
 - **Zwei Zieltypen:** „Mindestens“ (Wert ≥ Ziel) und „Höchstens“/Limit (Wert ≤ Ziel, zählt erst, wenn etwas eingetragen ist).
